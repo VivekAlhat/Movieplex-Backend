@@ -136,16 +136,20 @@ moviesRouter.get("/find/reviews/:movieId", (req, res) => {
 
 moviesRouter.post("/search/", (req, res) => {
   const query = req.body.query;
-  axios
-    .get(
-      `${BASE_URI}/search/movie?api_key=${process.env.API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`
-    )
-    .then((response) => {
-      res.json(response.data);
-    })
-    .catch((err) => {
-      res.json(err);
-    });
+  if (query) {
+    axios
+      .get(
+        `${BASE_URI}/search/movie?api_key=${process.env.API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`
+      )
+      .then((response) => {
+        res.json(response.data);
+      })
+      .catch((err) => {
+        res.json(err);
+      });
+  } else {
+    res.status(400).json({ error: "Query string should not be empty" });
+  }
 });
 
 module.exports = moviesRouter;
