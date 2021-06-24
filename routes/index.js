@@ -3,7 +3,7 @@ const router = express.Router();
 
 /* GET home route. */
 router.get("/", function (req, res, next) {
-  res.json({ res: "Welcome to the Moviplex backend client." });
+  res.json({ response: "Welcome to the Moviplex backend client." });
 });
 
 module.exports = router;
