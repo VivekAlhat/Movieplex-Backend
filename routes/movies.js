@@ -27,10 +27,10 @@ moviesRouter.get("/genres/:genreId", (req, res) => {
     .catch((err) => res.json(err));
 });
 
-moviesRouter.get("/latest", (req, res) => {
+moviesRouter.get("/nowplaying/:page", (req, res) => {
   axios
     .get(
-      `${BASE_URI}/movie/latest?api_key=${process.env.API_KEY}&language=en-US&page=1`
+      `${BASE_URI}/movie/now_playing?api_key=${process.env.API_KEY}&language=en-US&page=${req.params.page}`
     )
     .then((response) => {
       res.json(response.data);
@@ -38,10 +38,10 @@ moviesRouter.get("/latest", (req, res) => {
     .catch((err) => res.json(err));
 });
 
-moviesRouter.get("/nowplaying", (req, res) => {
+moviesRouter.get("/popular/:page", (req, res) => {
   axios
     .get(
-      `${BASE_URI}/movie/now_playing?api_key=${process.env.API_KEY}&language=en-US&page=1`
+      `${BASE_URI}/movie/popular?api_key=${process.env.API_KEY}&language=en-US&page=${req.params.page}`
     )
     .then((response) => {
       res.json(response.data);
@@ -49,10 +49,10 @@ moviesRouter.get("/nowplaying", (req, res) => {
     .catch((err) => res.json(err));
 });
 
-moviesRouter.get("/popular", (req, res) => {
+moviesRouter.get("/toprated/:page", (req, res) => {
   axios
     .get(
-      `${BASE_URI}/movie/popular?api_key=${process.env.API_KEY}&language=en-US&page=1`
+      `${BASE_URI}/movie/top_rated?api_key=${process.env.API_KEY}&language=en-US&page=${req.params.page}`
     )
     .then((response) => {
       res.json(response.data);
@@ -60,21 +60,10 @@ moviesRouter.get("/popular", (req, res) => {
     .catch((err) => res.json(err));
 });
 
-moviesRouter.get("/toprated", (req, res) => {
+moviesRouter.get("/upcoming/:page", (req, res) => {
   axios
     .get(
-      `${BASE_URI}/movie/top_rated?api_key=${process.env.API_KEY}&language=en-US&page=1`
-    )
-    .then((response) => {
-      res.json(response.data);
-    })
-    .catch((err) => res.json(err));
-});
-
-moviesRouter.get("/upcoming", (req, res) => {
-  axios
-    .get(
-      `${BASE_URI}/movie/upcoming?api_key=${process.env.API_KEY}&language=en-US&page=1`
+      `${BASE_URI}/movie/upcoming?api_key=${process.env.API_KEY}&language=en-US&page=${req.params.page}`
     )
     .then((response) => {
       res.json(response.data);
